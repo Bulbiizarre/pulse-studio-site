@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Confidentialité · Pulse Studio</title>
+  <meta name="description" content="Politique de confidentialité de Pulse Studio : données collectées, stockage local SQLite, jetons OAuth et courtier Cloudflare.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self'; script-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="alternate" hreflang="en" href="en/privacy.html">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="index.html"><img src="assets/icon.svg" alt="" width="32" height="32"> Pulse Studio</a>
+      <nav class="nav" aria-label="Navigation">
+        <a href="index.html">Accueil</a>
+        <a href="confidentialite.html" aria-current="page">Confidentialité</a>
+        <a href="conditions.html">Conditions d’utilisation</a>
+        <a class="lang" href="en/privacy.html" hreflang="en" lang="en">English</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap doc">
+    <h1>Politique de confidentialité</h1>
+    <p class="meta">Dernière mise à jour : 12 novembre 2026 · <a href="en/privacy.html" hreflang="en" lang="en">English version</a></p>
+
+    <div class="note">
+      <p><strong>En bref.</strong> Les statistiques sont enregistrées uniquement sur le PC, dans une base SQLite locale. Les jetons
+        d’accès sont gardés dans le Gestionnaire d’identification Windows.</p>
+      <p>Pour TikTok, un petit serveur (« courtier », Cloudflare Workers) fait l’échange et le renouvellement des jetons, comme
+        TikTok l’exige. Des jetons transitent donc par ce serveur, qui conserve le jeton de renouvellement chiffré. Aucune statistique
+        n’y passe.</p>
+      <p>Aucune donnée n’est vendue, partagée ou utilisée pour de la publicité.</p>
+    </div>
+
+    <nav class="toc" aria-label="Sommaire">
+      <ol>
+        <li><a href="#portee">Qui est concerné</a></li>
+        <li><a href="#etat">Déjà actif ou prévu</a></li>
+        <li><a href="#donnees">Données lues</a></li>
+        <li><a href="#stockage">Stockage local</a></li>
+        <li><a href="#jetons">Jetons et identifiants</a></li>
+        <li><a href="#courtier">Courtier Cloudflare</a></li>
+        <li><a href="#tiers">Services tiers</a></li>
+        <li><a href="#partage">Partage et usage</a></li>
+        <li><a href="#duree">Durées de conservation</a></li>
+        <li><a href="#choix">Déconnexion et suppression</a></li>
+        <li><a href="#securite">Sécurité</a></li>
+        <li><a href="#site">Ce site web</a></li>
+        <li><a href="#contact">Modifications et contact</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="portee">1. Qui est concerné</h2>
+    <p>Pulse Studio est un logiciel de bureau Windows, personnel, gratuit et non commercial. Il n’est ni vendu ni distribué, et il
+      n’a pas de comptes utilisateurs. Son développeur l’utilise uniquement pour suivre les statistiques de <strong>ses propres
+      comptes</strong>.</p>
+    <p>Sur TikTok, l’application fonctionne en mode sandbox : seuls des comptes appartenant au développeur peuvent s’y connecter.
+      Cette politique décrit donc le traitement des données de ces comptes.</p>
+
+    <h2 id="etat">2. Déjà actif ou prévu</h2>
+    <table>
+      <thead><tr><th>Élément</th><th>État au 12 novembre 2026</th></tr></thead>
+      <tbody>
+        <tr><td><strong>YouTube</strong> (clé d’API, données publiques)</td><td>Opérationnel</td></tr>
+        <tr><td><strong>Base SQLite locale</strong> et <strong>Gestionnaire d’identification Windows</strong></td><td>Opérationnels</td></tr>
+        <tr><td><strong>TikTok</strong> (connexion OAuth, lecture du profil et des vidéos)</td><td>Programmé et testé en simulation. L’application TikTok est en cours de configuration en mode sandbox : aucune donnée TikTok n’est encore lue.</td></tr>
+        <tr><td><strong>Courtier Cloudflare</strong> (échange des jetons TikTok)</td><td>Programmé et testé, pas encore mis en ligne</td></tr>
+        <tr><td><strong>Instagram et Facebook</strong></td><td>Prévus. Ni connexion ni lecture aujourd’hui</td></tr>
+      </tbody>
+    </table>
+    <p>Les sections suivantes décrivent le fonctionnement de chaque élément une fois actif.</p>
+
+    <h2 id="donnees">3. Données lues</h2>
+    <p>Seules les données nécessaires au tableau de bord sont demandées, avec des autorisations en lecture seule.</p>
+    <table>
+      <thead><tr><th>Plateforme</th><th>Autorisations</th><th>Données lues et enregistrées</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>TikTok</strong></td>
+          <td><code>user.info.basic</code>, <code>user.info.stats</code>, <code>video.list</code></td>
+          <td>
+            <p>Compte : identifiant de compte propre à l’application (<code>open_id</code>), nom affiché, nombre d’abonnés, nombre
+              total de likes reçus, nombre de vidéos publiques.</p>
+            <p>Vidéos publiques : identifiant, titre ou début de la description (150 caractères au plus), date de publication,
+              durée, adresse de l’image de couverture, lien de partage, nombre de vues, de likes, de commentaires et de partages.</p>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>YouTube</strong></td>
+          <td>Clé YouTube Data API v3 (données publiques, sans connexion de compte)</td>
+          <td>Vidéos : identifiant, titre, miniature, date de publication, durée, nom de la chaîne, vues, likes, commentaires.
+            Chaîne : abonnés, vues totales, nombre de vidéos.</td>
+        </tr>
+        <tr>
+          <td><strong>Instagram, Facebook</strong></td>
+          <td>Prévus, pas encore actifs</td>
+          <td>Aucune donnée lue aujourd’hui. Cette politique sera mise à jour avant leur activation.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p><strong>Ne sont jamais lus</strong> : les vidéos privées, les brouillons, les messages, le contenu des commentaires, les
+      données des spectateurs (identité, localisation, âge), l’adresse e-mail, le numéro de téléphone, les contacts. Pulse Studio
+      ne demande aucune autorisation de publication ou de modification.</p>
+
+    <h2 id="stockage">4. Stockage local</h2>
+    <ul>
+      <li>Les données ci-dessus sont enregistrées dans une base <strong>SQLite sur le PC</strong>, dans le dossier de données de
+        l’application (<code>%APPDATA%\com.pulsestudio.app\pulse.db</code>).</li>
+      <li>La base contient les relevés successifs et l’historique stabilisé (une baisse passagère n’est retenue qu’après
+        confirmation), qui servent aux graphiques.</li>
+      <li>La base n’est envoyée à aucun serveur. Les éventuelles sauvegardes sont des copies locales faites par l’utilisateur.</li>
+    </ul>
+
+    <h2 id="jetons">5. Jetons et identifiants</h2>
+    <ul>
+      <li><strong>Sur le PC, dans le Gestionnaire d’identification Windows</strong> : le jeton d’accès TikTok (valable environ
+        2 heures), la clé d’API YouTube et la clé d’appareil, qui authentifie le PC auprès du courtier.</li>
+      <li>Les jetons ne sont jamais écrits dans la base SQLite, dans les journaux, dans le code source ni dans l’interface.</li>
+      <li><strong>Sur le courtier</strong> (voir section 6) : le secret de l’application TikTok, qui n’est jamais présent sur le
+        PC, et le jeton de renouvellement TikTok, chiffré.</li>
+    </ul>
+
+    <h2 id="courtier">6. Courtier Cloudflare</h2>
+    <p>TikTok exige que l’échange du code d’autorisation contre des jetons, ainsi que leur renouvellement, utilise le secret de
+      l’application et se fasse sur un serveur. Pulse Studio utilise pour cela un petit service, le « courtier », hébergé sur
+      Cloudflare Workers (offre gratuite).</p>
+    <table>
+      <thead><tr><th></th><th>Détail</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Ce qui transite</strong></td>
+          <td>Pendant la connexion : le code d’autorisation, le vérificateur PKCE et l’adresse de retour locale. Ensuite, les jetons
+            renvoyés par TikTok et l’<code>open_id</code>. Le jeton d’accès est retransmis au PC.</td>
+        </tr>
+        <tr>
+          <td><strong>Ce qui est conservé</strong></td>
+          <td>
+            <ul>
+              <li>Le jeton de renouvellement TikTok, chiffré en AES-256-GCM et associé à l’<code>open_id</code>.</li>
+              <li>Des identifiants à usage unique (« nonces »), pendant 10 minutes, contre le rejeu de requêtes.</li>
+              <li>Pour Instagram et Facebook, quand ils seront actifs : le résultat de connexion, chiffré, pendant 10 minutes au
+                plus, puis effacé dès que le PC l’a récupéré.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Ce qui n’y passe jamais</strong></td>
+          <td>Les statistiques, les vidéos, leurs titres et l’historique : ils sont lus directement par le PC auprès des API
+            officielles.</td>
+        </tr>
+        <tr>
+          <td><strong>Journaux</strong></td>
+          <td>Les journaux d’invocation du courtier sont désactivés, et le code n’écrit rien dans la console. En tant qu’hébergeur,
+            Cloudflare traite les données techniques des requêtes (adresse IP, en-têtes) selon sa propre politique de
+            confidentialité.</td>
+        </tr>
+        <tr>
+          <td><strong>État</strong></td>
+          <td>À la date de mise à jour, le courtier est programmé et testé mais pas encore mis en ligne.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 id="tiers">7. Services tiers</h2>
+    <ul>
+      <li><strong>TikTok</strong> (<code>open.tiktokapis.com</code>, pages de connexion <code>tiktok.com</code>) et
+        <strong>Google / YouTube</strong> (<code>googleapis.com</code>) reçoivent les requêtes envoyées par le PC. Ils les traitent
+        selon leurs propres politiques.</li>
+      <li><strong>Cloudflare</strong> héberge le courtier.</li>
+      <li><strong>GitHub</strong> héberge ce site (voir section 12).</li>
+    </ul>
+
+    <h2 id="partage">8. Partage et usage</h2>
+    <p>Les données servent uniquement à afficher, sur le PC, l’évolution des statistiques des comptes du développeur. Elles ne sont
+      ni vendues, ni louées, ni partagées. Elles ne servent ni à la publicité ni au profilage, et ne sont pas utilisées pour
+      entraîner des modèles. L’application ne contient ni mesure d’audience, ni télémétrie, ni rapport d’erreurs automatique.</p>
+
+    <h2 id="duree">9. Durées de conservation</h2>
+    <ul>
+      <li><strong>Base locale</strong> : jusqu’à ce que l’utilisateur la supprime. Une déconnexion conserve l’historique déjà
+        relevé.</li>
+      <li><strong>Jeton d’accès TikTok</strong> : environ 2 heures. Il est remplacé à chaque renouvellement et supprimé à la
+        déconnexion.</li>
+      <li><strong>Jeton de renouvellement TikTok</strong> (courtier) : jusqu’à la déconnexion, sa révocation ou son expiration
+        fixée par TikTok.</li>
+      <li><strong>Nonces et résultats de connexion</strong> (courtier) : 10 minutes au plus.</li>
+    </ul>
+
+    <h2 id="choix">10. Déconnexion et suppression</h2>
+    <ul>
+      <li><strong>« Déconnecter »</strong>, dans la page Comptes connectés de l’application :
+        <ul>
+          <li>le courtier efface d’abord le jeton de renouvellement, puis révoque l’accès auprès de TikTok ;</li>
+          <li>le jeton local est supprimé du Gestionnaire d’identification ;</li>
+          <li>TikTok est mis en pause.</li>
+        </ul>
+      </li>
+      <li>L’accès peut aussi être retiré à tout moment depuis les paramètres du compte TikTok, dans la gestion des applications
+        autorisées.</li>
+      <li>Pour supprimer tout l’historique local, il suffit de supprimer le fichier <code>pulse.db</code>, application fermée.
+        L’historique YouTube peut aussi être effacé depuis l’application.</li>
+    </ul>
+
+    <h2 id="securite">11. Sécurité</h2>
+    <ul>
+      <li>Toutes les communications réseau sont chiffrées (HTTPS). Seul le retour de connexion TikTok arrive en local, sur
+        <code>http://127.0.0.1</code>, comme TikTok le prévoit pour les applications de bureau.</li>
+      <li>La connexion TikTok utilise PKCE et un paramètre <code>state</code> vérifié.</li>
+      <li>Chaque requête du PC vers le courtier est signée (HMAC-SHA256), horodatée et à usage unique. Le débit est limité.</li>
+      <li>Les autorisations sont minimales et en lecture seule.</li>
+    </ul>
+
+    <h2 id="site">12. Ce site web</h2>
+    <p>Ce site est statique et hébergé par GitHub Pages. Il n’utilise ni cookie, ni script, ni mesure d’audience, ni ressource
+      externe. GitHub peut enregistrer des données techniques de visite (par exemple l’adresse IP) selon sa propre déclaration de
+      confidentialité.</p>
+
+    <h2 id="contact">13. Modifications et contact</h2>
+    <p>Cette politique sera mise à jour à chaque évolution du traitement des données, notamment avant l’activation d’Instagram et
+      de Facebook. La date de mise à jour figure en haut de la page.</p>
+    <p>Pour toute question, ouvrez une demande (« Issue ») sur le dépôt GitHub public qui héberge ce site.</p>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>Pulse Studio, projet personnel non commercial. Il n’est affilié ni à TikTok, ni à Google (YouTube), ni à Meta.</p>
+      <nav aria-label="Pages légales">
+        <a href="index.html">Accueil</a>
+        <a href="conditions.html">Conditions</a>
+        <a href="en/privacy.html" hreflang="en" lang="en">English</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

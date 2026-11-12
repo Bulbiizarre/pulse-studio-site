@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pulse Studio</title>
+  <meta name="description" content="Pulse Studio : logiciel de bureau personnel qui suit les statistiques de mes propres publications YouTube et TikTok. Données stockées sur le PC.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self'; script-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="alternate" hreflang="en" href="en/index.html">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="index.html"><img src="assets/icon.svg" alt="" width="32" height="32"> Pulse Studio</a>
+      <nav class="nav" aria-label="Navigation">
+        <a href="index.html" aria-current="page">Accueil</a>
+        <a href="confidentialite.html">Confidentialité</a>
+        <a href="conditions.html">Conditions d’utilisation</a>
+        <a class="lang" href="en/index.html" hreflang="en" lang="en">English</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <span class="eyebrow">Logiciel personnel · gratuit · non commercial</span>
+      <h1>Les statistiques de <span class="grad">mes publications</span>, sur mon PC.</h1>
+      <p class="lead">
+        Pulse Studio est une application de bureau Windows. Elle relève régulièrement les statistiques publiques de mes
+        propres vidéos (vues, likes, commentaires, partages, abonnés) et les présente dans un tableau de bord unique.
+        L’historique est enregistré localement, dans une base SQLite sur l’ordinateur.
+      </p>
+    </section>
+
+    <div class="note">
+      <p><strong>Pulse Studio n’est pas un service en ligne.</strong> Il n’est ni vendu ni distribué, et il n’a pas de comptes
+        utilisateurs. Il sert uniquement à son développeur, pour ses propres comptes.</p>
+      <p>Cette page présente l’application aux plateformes dont elle utilise les API officielles. Elle ne propose aucun téléchargement.</p>
+    </div>
+
+    <h2>Plateformes</h2>
+    <div class="cards">
+      <article class="card">
+        <span class="status is-on">Actif</span>
+        <h3>YouTube</h3>
+        <p>Statistiques publiques des vidéos et de la chaîne via YouTube Data API v3, avec une clé d’API. Aucune connexion de compte.</p>
+      </article>
+      <article class="card">
+        <span class="status is-setup">En configuration (sandbox)</span>
+        <h3>TikTok</h3>
+        <p>Connexion par Login Kit (OAuth) en lecture seule : profil, statistiques du compte et vidéos publiques (Display API).</p>
+      </article>
+      <article class="card">
+        <span class="status">Prévu</span>
+        <h3>Instagram et Facebook</h3>
+        <p>Comptes professionnels Instagram et Pages Facebook, en lecture seule. Pas encore actifs.</p>
+      </article>
+    </div>
+
+    <h2>Fonctionnement</h2>
+    <div class="cards">
+      <article class="card">
+        <h3>1. Connexion officielle</h3>
+        <p>Le compte se connecte une fois, sur la page officielle de la plateforme, ouverte dans le navigateur. Les autorisations
+          demandées sont minimales et en lecture seule.</p>
+      </article>
+      <article class="card">
+        <h3>2. Relevés réguliers</h3>
+        <p>L’application lit les compteurs publics depuis le PC, directement auprès des API officielles. Une baisse passagère n’est
+          retenue qu’une fois confirmée.</p>
+      </article>
+      <article class="card">
+        <h3>3. Données locales</h3>
+        <p>L’historique est stocké en SQLite sur le PC. Les jetons sont gardés dans le Gestionnaire d’identification Windows, jamais
+          dans la base ni dans le code.</p>
+      </article>
+      <article class="card">
+        <h3>4. Courtier de jetons</h3>
+        <p>TikTok exige que l’échange de jetons, qui utilise le secret de l’application, se fasse sur un serveur. Un petit service
+          Cloudflare Workers s’en charge. Il ne reçoit aucune statistique.</p>
+      </article>
+    </div>
+
+    <h2>Ce que Pulse Studio ne fait pas</h2>
+    <ul>
+      <li>Il ne publie rien, ne modifie aucun compte et n’envoie aucun message.</li>
+      <li>Il ne lit ni les vidéos privées, ni les messages, ni les données des spectateurs.</li>
+      <li>Il ne vend ni ne partage aucune donnée, et n’affiche aucune publicité.</li>
+      <li>Il n’utilise ni mesure d’audience, ni télémétrie, ni cookie.</li>
+    </ul>
+
+    <p>Détails : <a href="confidentialite.html">politique de confidentialité</a> et <a href="conditions.html">conditions d’utilisation</a>.</p>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>Pulse Studio, projet personnel non commercial. Il n’est affilié ni à TikTok, ni à Google (YouTube), ni à Meta.</p>
+      <nav aria-label="Pages légales">
+        <a href="confidentialite.html">Confidentialité</a>
+        <a href="conditions.html">Conditions</a>
+        <a href="en/index.html" hreflang="en" lang="en">English</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

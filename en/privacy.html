@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy · Pulse Studio</title>
+  <meta name="description" content="Pulse Studio Privacy Policy: data read, local SQLite storage, OAuth tokens and the Cloudflare token broker.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self'; script-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="alternate" hreflang="fr" href="../confidentialite.html">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="index.html"><img src="../assets/icon.svg" alt="" width="32" height="32"> Pulse Studio</a>
+      <nav class="nav" aria-label="Navigation">
+        <a href="index.html">Home</a>
+        <a href="privacy.html" aria-current="page">Privacy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a class="lang" href="../confidentialite.html" hreflang="fr" lang="fr">Français</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap doc">
+    <h1>Privacy Policy</h1>
+    <p class="meta">Last updated: November 12, 2026 · <a href="../confidentialite.html" hreflang="fr" lang="fr">Version française</a></p>
+
+    <div class="note">
+      <p><strong>In short.</strong> Statistics are saved only on the PC, in a local SQLite database. Access tokens are kept in
+        Windows Credential Manager.</p>
+      <p>For TikTok, a small server (the “broker”, on Cloudflare Workers) exchanges and refreshes tokens, as TikTok requires. Tokens
+        therefore pass through this server, which keeps the refresh token encrypted. No statistics go through it.</p>
+      <p>No data is sold, shared or used for advertising.</p>
+    </div>
+
+    <nav class="toc" aria-label="Contents">
+      <ol>
+        <li><a href="#scope">Who this covers</a></li>
+        <li><a href="#status">Active or planned</a></li>
+        <li><a href="#data">Data read</a></li>
+        <li><a href="#storage">Local storage</a></li>
+        <li><a href="#tokens">Tokens and credentials</a></li>
+        <li><a href="#broker">Cloudflare broker</a></li>
+        <li><a href="#third">Third-party services</a></li>
+        <li><a href="#sharing">Sharing and use</a></li>
+        <li><a href="#retention">Retention</a></li>
+        <li><a href="#choices">Disconnection and deletion</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#site">This website</a></li>
+        <li><a href="#contact">Changes and contact</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="scope">1. Who this covers</h2>
+    <p>Pulse Studio is a personal, free, non-commercial Windows desktop application. It is not sold or distributed, and it has no
+      user accounts. Its developer uses it only to track the statistics of <strong>their own accounts</strong>.</p>
+    <p>On TikTok, the application runs in sandbox mode: only accounts owned by the developer can connect to it. This policy
+      therefore describes how the data of those accounts is handled.</p>
+
+    <h2 id="status">2. Active or planned</h2>
+    <table>
+      <thead><tr><th>Item</th><th>Status as of November 12, 2026</th></tr></thead>
+      <tbody>
+        <tr><td><strong>YouTube</strong> (API key, public data)</td><td>Operational</td></tr>
+        <tr><td><strong>Local SQLite database</strong> and <strong>Windows Credential Manager</strong></td><td>Operational</td></tr>
+        <tr><td><strong>TikTok</strong> (OAuth sign-in, reading the profile and videos)</td><td>Built and tested in simulation. The TikTok app is being set up in sandbox mode: no TikTok data is read yet.</td></tr>
+        <tr><td><strong>Cloudflare broker</strong> (TikTok token exchange)</td><td>Built and tested, not yet online</td></tr>
+        <tr><td><strong>Instagram and Facebook</strong></td><td>Planned. No sign-in or reading today</td></tr>
+      </tbody>
+    </table>
+    <p>The following sections describe how each item works once active.</p>
+
+    <h2 id="data">3. Data read</h2>
+    <p>Only the data needed for the dashboard is requested, with read-only permissions.</p>
+    <table>
+      <thead><tr><th>Platform</th><th>Permissions</th><th>Data read and saved</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>TikTok</strong></td>
+          <td><code>user.info.basic</code>, <code>user.info.stats</code>, <code>video.list</code></td>
+          <td>
+            <p>Account: app-specific account identifier (<code>open_id</code>), display name, follower count, total likes received,
+              number of public videos.</p>
+            <p>Public videos: identifier, title or start of the description (150 characters at most), publication date, duration,
+              cover image URL, share link, view, like, comment and share counts.</p>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>YouTube</strong></td>
+          <td>YouTube Data API v3 key (public data, no account sign-in)</td>
+          <td>Videos: identifier, title, thumbnail, publication date, duration, channel name, views, likes, comments. Channel:
+            subscribers, total views, number of videos.</td>
+        </tr>
+        <tr>
+          <td><strong>Instagram, Facebook</strong></td>
+          <td>Planned, not active yet</td>
+          <td>No data is read today. This policy will be updated before they are enabled.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p><strong>Never read</strong>: private videos, drafts, messages, comment content, viewer data (identity, location, age), email
+      address, phone number, contacts. Pulse Studio requests no permission to post or modify anything.</p>
+
+    <h2 id="storage">4. Local storage</h2>
+    <ul>
+      <li>The data above is saved in a <strong>SQLite database on the PC</strong>, in the application’s data folder
+        (<code>%APPDATA%\com.pulsestudio.app\pulse.db</code>).</li>
+      <li>The database holds successive readings and the stabilized history (a temporary drop is only kept once confirmed), which
+        feed the charts.</li>
+      <li>The database is not sent to any server. Any backups are local copies made by the user.</li>
+    </ul>
+
+    <h2 id="tokens">5. Tokens and credentials</h2>
+    <ul>
+      <li><strong>On the PC, in Windows Credential Manager</strong>: the TikTok access token (valid for about 2 hours), the YouTube
+        API key and the device key, which authenticates the PC to the broker.</li>
+      <li>Tokens are never written to the SQLite database, logs, source code or user interface.</li>
+      <li><strong>On the broker</strong> (see section 6): the TikTok app secret, which is never present on the PC, and the TikTok
+        refresh token, encrypted.</li>
+    </ul>
+
+    <h2 id="broker">6. Cloudflare broker</h2>
+    <p>TikTok requires the exchange of the authorization code for tokens, and their refresh, to use the app secret and to happen on
+      a server. For this, Pulse Studio uses a small service, the “broker”, hosted on Cloudflare Workers (free plan).</p>
+    <table>
+      <thead><tr><th></th><th>Details</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>What passes through</strong></td>
+          <td>During sign-in: the authorization code, the PKCE verifier and the local redirect address. Then the tokens returned by
+            TikTok and the <code>open_id</code>. The access token is passed back to the PC.</td>
+        </tr>
+        <tr>
+          <td><strong>What is kept</strong></td>
+          <td>
+            <ul>
+              <li>The TikTok refresh token, encrypted with AES-256-GCM and linked to the <code>open_id</code>.</li>
+              <li>One-time identifiers (“nonces”), for 10 minutes, to block replayed requests.</li>
+              <li>For Instagram and Facebook, once active: the encrypted sign-in result, for 10 minutes at most, erased as soon as the
+                PC has collected it.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>What never goes through it</strong></td>
+          <td>Statistics, videos, their titles and the history: the PC reads them directly from the official APIs.</td>
+        </tr>
+        <tr>
+          <td><strong>Logs</strong></td>
+          <td>The broker’s invocation logs are disabled, and its code writes nothing to the console. As the host, Cloudflare
+            processes the technical data of requests (IP address, headers) under its own privacy policy.</td>
+        </tr>
+        <tr>
+          <td><strong>Status</strong></td>
+          <td>As of the update date, the broker is built and tested but not yet online.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 id="third">7. Third-party services</h2>
+    <ul>
+      <li><strong>TikTok</strong> (<code>open.tiktokapis.com</code>, sign-in pages on <code>tiktok.com</code>) and <strong>Google /
+        YouTube</strong> (<code>googleapis.com</code>) receive the requests sent by the PC. They handle them under their own
+        policies.</li>
+      <li><strong>Cloudflare</strong> hosts the broker.</li>
+      <li><strong>GitHub</strong> hosts this website (see section 12).</li>
+    </ul>
+
+    <h2 id="sharing">8. Sharing and use</h2>
+    <p>The data is used only to show, on the PC, how the statistics of the developer’s accounts change over time. It is not sold,
+      rented or shared. It is not used for advertising or profiling, and it is not used to train models. The application contains
+      no analytics, telemetry or automatic error reporting.</p>
+
+    <h2 id="retention">9. Retention</h2>
+    <ul>
+      <li><strong>Local database</strong>: until the user deletes it. Disconnecting keeps the history already recorded.</li>
+      <li><strong>TikTok access token</strong>: about 2 hours. It is replaced at each refresh and deleted on disconnection.</li>
+      <li><strong>TikTok refresh token</strong> (broker): until disconnection, revocation, or the expiry set by TikTok.</li>
+      <li><strong>Nonces and sign-in results</strong> (broker): 10 minutes at most.</li>
+    </ul>
+
+    <h2 id="choices">10. Disconnection and deletion</h2>
+    <ul>
+      <li><strong>“Disconnect”</strong>, on the application’s Connected accounts page:
+        <ul>
+          <li>the broker first erases the refresh token, then revokes access with TikTok;</li>
+          <li>the local token is deleted from Credential Manager;</li>
+          <li>TikTok is paused.</li>
+        </ul>
+      </li>
+      <li>Access can also be removed at any time from the TikTok account settings, in the management of authorized apps.</li>
+      <li>To delete the whole local history, delete the <code>pulse.db</code> file while the application is closed. The YouTube
+        history can also be cleared from within the application.</li>
+    </ul>
+
+    <h2 id="security">11. Security</h2>
+    <ul>
+      <li>All network traffic is encrypted (HTTPS). Only the TikTok sign-in callback arrives locally, on
+        <code>http://127.0.0.1</code>, as TikTok specifies for desktop applications.</li>
+      <li>TikTok sign-in uses PKCE and a verified <code>state</code> parameter.</li>
+      <li>Every request from the PC to the broker is signed (HMAC-SHA256), timestamped and single-use. The request rate is
+        limited.</li>
+      <li>Permissions are minimal and read-only.</li>
+    </ul>
+
+    <h2 id="site">12. This website</h2>
+    <p>This website is static and hosted by GitHub Pages. It uses no cookies, scripts, analytics or external resources. GitHub may
+      record technical visit data (such as the IP address) under its own privacy statement.</p>
+
+    <h2 id="contact">13. Changes and contact</h2>
+    <p>This policy will be updated whenever data handling changes, in particular before Instagram and Facebook are enabled. The
+      update date is shown at the top of the page.</p>
+    <p>For any question, open an issue on the public GitHub repository that hosts this website.</p>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>Pulse Studio, a personal non-commercial project. It is not affiliated with TikTok, Google (YouTube) or Meta.</p>
+      <nav aria-label="Legal pages">
+        <a href="index.html">Home</a>
+        <a href="terms.html">Terms</a>
+        <a href="../confidentialite.html" hreflang="fr" lang="fr">Français</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pulse Studio</title>
+  <meta name="description" content="Pulse Studio: a personal desktop app that tracks the statistics of my own YouTube and TikTok posts. Data stays on the PC.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self'; script-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="alternate" hreflang="fr" href="../index.html">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="index.html"><img src="../assets/icon.svg" alt="" width="32" height="32"> Pulse Studio</a>
+      <nav class="nav" aria-label="Navigation">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a class="lang" href="../index.html" hreflang="fr" lang="fr">Français</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <span class="eyebrow">Personal · free · non-commercial software</span>
+      <h1>The statistics of <span class="grad">my own posts</span>, on my PC.</h1>
+      <p class="lead">
+        Pulse Studio is a Windows desktop application. It regularly reads the public statistics of my own videos (views, likes,
+        comments, shares, followers) and shows them in a single dashboard. The history is saved locally, in a SQLite database on
+        the computer.
+      </p>
+    </section>
+
+    <div class="note">
+      <p><strong>Pulse Studio is not an online service.</strong> It is not sold or distributed, and it has no user accounts. It is
+        used only by its developer, for their own accounts.</p>
+      <p>This page describes the application to the platforms whose official APIs it uses. Nothing is offered for download.</p>
+    </div>
+
+    <h2>Platforms</h2>
+    <div class="cards">
+      <article class="card">
+        <span class="status is-on">Active</span>
+        <h3>YouTube</h3>
+        <p>Public video and channel statistics through the YouTube Data API v3, with an API key. No account sign-in.</p>
+      </article>
+      <article class="card">
+        <span class="status is-setup">Being set up (sandbox)</span>
+        <h3>TikTok</h3>
+        <p>Read-only sign-in with Login Kit (OAuth): profile, account statistics and public videos (Display API).</p>
+      </article>
+      <article class="card">
+        <span class="status">Planned</span>
+        <h3>Instagram and Facebook</h3>
+        <p>Instagram professional accounts and Facebook Pages, read-only. Not active yet.</p>
+      </article>
+    </div>
+
+    <h2>How it works</h2>
+    <div class="cards">
+      <article class="card">
+        <h3>1. Official sign-in</h3>
+        <p>The account is connected once, on the platform’s official page, opened in the web browser. The permissions requested are
+          minimal and read-only.</p>
+      </article>
+      <article class="card">
+        <h3>2. Regular readings</h3>
+        <p>The application reads public counters from the PC, directly from the official APIs. A temporary drop is only kept once it
+          is confirmed.</p>
+      </article>
+      <article class="card">
+        <h3>3. Local data</h3>
+        <p>The history is stored in SQLite on the PC. Tokens are kept in Windows Credential Manager, never in the database or in the
+          code.</p>
+      </article>
+      <article class="card">
+        <h3>4. Token broker</h3>
+        <p>TikTok requires the token exchange, which uses the app secret, to happen on a server. A small Cloudflare Workers service
+          handles it. It never receives any statistics.</p>
+      </article>
+    </div>
+
+    <h2>What Pulse Studio does not do</h2>
+    <ul>
+      <li>It does not post anything, change any account or send any message.</li>
+      <li>It does not read private videos, messages or viewer data.</li>
+      <li>It does not sell or share any data, and shows no ads.</li>
+      <li>It uses no analytics, telemetry or cookies.</li>
+    </ul>
+
+    <p>Details: <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms of Service</a>.</p>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>Pulse Studio, a personal non-commercial project. It is not affiliated with TikTok, Google (YouTube) or Meta.</p>
+      <nav aria-label="Legal pages">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="../index.html" hreflang="fr" lang="fr">Français</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
